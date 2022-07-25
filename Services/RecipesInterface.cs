@@ -8,7 +8,8 @@ namespace Recipes.Services
         public string returnV(string data);
         public Recipe GetRecipe(int id);
         public List<Recipe> GetAllRecipes();
-        public void DeleteById(int id);
+        public void DeleteRecipe(int id);
         public void AddRecipe(Recipe recipe);
+        public void UpdateRecipe(Recipe recipe);
     }
 }

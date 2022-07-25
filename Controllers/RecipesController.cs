@@ -26,16 +26,22 @@ namespace Recipes.Controllers
             return recipesService.GetRecipe(id);
         }
 
-        //[HttpGet("delete{id}")]
-        //public void DeleteById(int id)
-        //{
-        //    recipesService.DeleteById(id);
-        //}
-
         [HttpDelete("{id}")]
-        public void DeleteById(int id)
+        public void DeleteRecipe(int id)
         {
-            recipesService.DeleteById(id);
+            recipesService.DeleteRecipe(id);
+        }
+
+        [HttpPost]
+        public void AddRecipe(Recipe recipe)
+        {
+            recipesService.AddRecipe(recipe);
+        }
+
+        [HttpPut("{id}")]
+        public void UpdateRecipe(Recipe recipe)
+        {
+            recipesService.UpdateRecipe(recipe);
         }
 
     }

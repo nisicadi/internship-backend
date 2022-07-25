@@ -23,7 +23,7 @@ namespace Recipes.Services
             return praksaDBContext.Recipes.ToList();
         }
 
-        public void DeleteById(int id)
+        public void DeleteRecipe(int id)
         {
             praksaDBContext.Recipes.Remove(praksaDBContext.Recipes.Find(id));
             praksaDBContext.SaveChanges();
@@ -32,6 +32,12 @@ namespace Recipes.Services
         public void AddRecipe(Recipe recipe)
         {
             praksaDBContext.Add(recipe);
+            praksaDBContext.SaveChanges();
+        }
+
+        public void UpdateRecipe(Recipe recipe)
+        {
+            praksaDBContext.Update(recipe);
             praksaDBContext.SaveChanges();
         }
     }
