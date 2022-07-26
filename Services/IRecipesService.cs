@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Recipes.Services
 {
-    public interface RecipesInterface
+    public interface IRecipesService
     {
         public string returnV(string data);
         public Recipe GetRecipe(int id);

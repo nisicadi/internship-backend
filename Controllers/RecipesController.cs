@@ -10,39 +10,41 @@ namespace Recipes.Controllers
     [ApiController]
     public class RecipesController : ControllerBase
     {
-        private readonly RecipesService recipesService = new RecipesService();
+        private readonly IRecipesService _recipesInterface;
+        public RecipesController(IRecipesService recipesInterface)
+        {
+            this._recipesInterface = recipesInterface;
+        }
 
 
         [HttpGet]
-
         public List<Recipe> Get()
         {
-            return recipesService.GetAllRecipes();
+            return _recipesInterface.GetAllRecipes();
         }
 
         [HttpGet("{id}")]
         public Recipe GetById(int id)
         {
-            return recipesService.GetRecipe(id);
+            return _recipesInterface.GetRecipe(id);
         }
 
         [HttpDelete("{id}")]
         public void DeleteRecipe(int id)
         {
-            recipesService.DeleteRecipe(id);
+            _recipesInterface.DeleteRecipe(id);
         }
 
         [HttpPost]
         public void AddRecipe(Recipe recipe)
         {
-            recipesService.AddRecipe(recipe);
+            _recipesInterface.AddRecipe(recipe);
         }
 
         [HttpPut("{id}")]
         public void UpdateRecipe(Recipe recipe)
         {
-            recipesService.UpdateRecipe(recipe);
+            _recipesInterface.UpdateRecipe(recipe);
         }
-
     }
 }

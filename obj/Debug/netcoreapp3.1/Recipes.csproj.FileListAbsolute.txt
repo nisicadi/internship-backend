@@ -122,3 +122,8 @@ C:\Users\Adi\Documents\Praksa\Recipes\Recipes\obj\Debug\netcoreapp3.1\staticweba
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.RazorTargetAssemblyInfo.cache
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.csproj.CopyComplete
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.genruntimeconfig.cache
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.MvcApplicationPartsAssemblyInfo.cs

@@ -4,9 +4,13 @@ using System.Linq;
 
 namespace Recipes.Services
 {
-    public class RecipesService : RecipesInterface
+    public class RecipesService : IRecipesService
     {
-        public PraksaDBContext praksaDBContext = new PraksaDBContext();
+        private PraksaDBContext praksaDBContext;
+        public RecipesService(PraksaDBContext praksaDBContext)
+        {
+            this.praksaDBContext = praksaDBContext;
+        }
 
         public string returnV(string data)
         {
