@@ -34,19 +34,19 @@ namespace Recipes.Models
 
             modelBuilder.Entity<Recipe>(entity =>
             {
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
+                entity.Property(e => e.recipeId).HasColumnName("RecipeID");
 
-                entity.Property(e => e.ImageUrl)
+                entity.Property(e => e.imageUrl)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecipeIngredients)
+                entity.Property(e => e.recipeIngredients)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RecipeTitle)
+                entity.Property(e => e.recipeTitle)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
