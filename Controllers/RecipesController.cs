@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace Recipes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class RecipesController : ControllerBase
     {
         private readonly IRecipesService _recipesInterface;

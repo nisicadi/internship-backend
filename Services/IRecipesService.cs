@@ -5,7 +5,6 @@ namespace Recipes.Services
 {
     public interface IRecipesService
     {
-        public string returnV(string data);
         public Recipe GetRecipe(int id);
         public List<Recipe> GetAllRecipes();
         public void DeleteRecipe(int id);

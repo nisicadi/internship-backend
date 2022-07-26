@@ -12,11 +12,6 @@ namespace Recipes.Services
             this.praksaDBContext = praksaDBContext;
         }
 
-        public string returnV(string data)
-        {
-            return data;
-        }
-
         public Recipe GetRecipe(int id)
         {
             return praksaDBContext.Recipes.Find(id);
