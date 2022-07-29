@@ -16,7 +16,6 @@ namespace Recipes.Controllers
             this._recipesInterface = recipesInterface;
         }
 
-
         [HttpGet]
         public List<Recipe> Get()
         {
