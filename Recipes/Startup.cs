@@ -9,12 +9,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Recipes.Controllers;
 using Recipes.Models;
-using Recipes.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using Recipes.Services.Interfaces;
+using Recipes.Services.Services;
 
 namespace Recipes
 {
@@ -31,6 +32,7 @@ namespace Recipes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRecipesService, RecipesService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddSingleton<ILoggerFactory, LoggerFactory>();
             services.Configure<Recipe>(Configuration);
             services.AddDbContext<PraksaDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RecipeURL")));

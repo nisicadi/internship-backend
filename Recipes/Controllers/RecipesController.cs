@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Recipes.Models;
-using Recipes.Services;
+using Recipes.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -13,17 +13,18 @@ namespace Recipes.Controllers
         private readonly IRecipesService _recipesInterface;
         public RecipesController(IRecipesService recipesInterface)
         {
-            this._recipesInterface = recipesInterface;
+            _recipesInterface = recipesInterface;
         }
 
+        //Recipe
         [HttpGet]
-        public List<Recipe> Get()
+        public List<Recipe> GetAllRecipes()
         {
             return _recipesInterface.GetAllRecipes();
         }
 
         [HttpGet("{id}")]
-        public Recipe GetById(int id)
+        public Recipe GetRecipeById(int id)
         {
             return _recipesInterface.GetRecipe(id);
         }

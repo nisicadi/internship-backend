@@ -1,8 +1,9 @@
 ﻿using Recipes.Models;
+using Recipes.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Recipes.Services
+namespace Recipes.Services.Services
 {
     public class RecipesService : IRecipesService
     {
@@ -24,21 +25,20 @@ namespace Recipes.Services
 
         public void DeleteRecipe(int id)
         {
-            praksaDBContext.Recipes.Remove(praksaDBContext.Recipes.Find(id));
+            praksaDBContext.Recipes.Remove(GetRecipe(id));
             praksaDBContext.SaveChanges();
         }
 
         public void AddRecipe(Recipe recipe)
         {
-            praksaDBContext.Add(recipe);
+            praksaDBContext.Recipes.Add(recipe);
             praksaDBContext.SaveChanges();
         }
 
         public void UpdateRecipe(Recipe recipe)
         {
-            praksaDBContext.Update(recipe);
+            praksaDBContext.Recipes.Update(recipe);
             praksaDBContext.SaveChanges();
         }
     }
 }
-    

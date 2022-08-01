@@ -7,9 +7,11 @@ namespace Recipes.Models
 {
     public partial class Recipe
     {
-        public int recipeId { get; set; }
-        public string recipeTitle { get; set; }
-        public string imageUrl { get; set; }
-        public string recipeIngredients { get; set; }
+        public int RecipeId { get; set; }
+        public string RecipeTitle { get; set; }
+        public string ImageUrl { get; set; }
+        public string RecipeIngredients { get; set; }
+        public int? CategoryId { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

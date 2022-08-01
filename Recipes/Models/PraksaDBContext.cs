@@ -17,6 +17,7 @@ namespace Recipes.Models
         {
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,24 +33,41 @@ namespace Recipes.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.Property(e => e.CategoryId).HasColumnName("categoryID");
+
+                entity.Property(e => e.CategoryName)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("categoryName");
+            });
+
             modelBuilder.Entity<Recipe>(entity =>
             {
-                entity.Property(e => e.recipeId).HasColumnName("RecipeID");
+                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
 
-                entity.Property(e => e.imageUrl)
+                entity.Property(e => e.CategoryId).HasColumnName("categoryID");
+
+                entity.Property(e => e.ImageUrl)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.recipeIngredients)
+                entity.Property(e => e.RecipeIngredients)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.recipeTitle)
+                entity.Property(e => e.RecipeTitle)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Recipes)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("fk_categoryID");
             });
 
             OnModelCreatingPartial(modelBuilder);

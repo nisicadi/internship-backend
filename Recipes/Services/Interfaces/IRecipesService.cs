@@ -1,7 +1,7 @@
 ﻿using Recipes.Models;
 using System.Collections.Generic;
 
-namespace Recipes.Services
+namespace Recipes.Services.Interfaces
 {
     public interface IRecipesService
     {
