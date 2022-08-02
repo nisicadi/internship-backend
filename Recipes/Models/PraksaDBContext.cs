@@ -18,6 +18,7 @@ namespace Recipes.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,6 +44,27 @@ namespace Recipes.Models
                     .HasColumnName("categoryName");
             });
 
+            modelBuilder.Entity<Ingredient>(entity =>
+            {
+                entity.Property(e => e.IngredientId).HasColumnName("ingredientID");
+
+                entity.Property(e => e.IngredientName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ingredientName");
+
+                entity.Property(e => e.Quantity)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("quantity");
+
+                entity.Property(e => e.RecipeId).HasColumnName("recipeID");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.Ingredients)
+                    .HasForeignKey(d => d.RecipeId)
+                    .HasConstraintName("FK__Ingredien__recip__5165187F");
+            });
+
             modelBuilder.Entity<Recipe>(entity =>
             {
                 entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
@@ -50,11 +72,6 @@ namespace Recipes.Models
                 entity.Property(e => e.CategoryId).HasColumnName("categoryID");
 
                 entity.Property(e => e.ImageUrl)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.RecipeIngredients)
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
