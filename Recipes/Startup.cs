@@ -37,7 +37,9 @@ namespace Recipes
             services.AddSingleton<ILoggerFactory, LoggerFactory>();
             services.Configure<Recipe>(Configuration);
             services.AddDbContext<PraksaDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RecipeURL")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             // Register the Swagger Generator service. This service is responsible for genrating Swagger Documents.
             // Note: Add this service at the end after AddMvc() or AddMvcCore().

@@ -15,12 +15,23 @@ namespace Recipes.Services.Services
 
         public Recipe GetRecipe(int id)
         {
-            return praksaDBContext.Recipes.Find(id);
+            Recipe recipe = praksaDBContext.Recipes.Find(id);
+            recipe.Ingredients = praksaDBContext.Ingredients.Where(o => o.RecipeId == recipe.RecipeId).ToList();
+            recipe.Category = praksaDBContext.Categories.Where(o => o.CategoryId == recipe.CategoryId).First();
+            
+            return recipe;
         }
 
         public List<Recipe> GetAllRecipes()
         {
-            return praksaDBContext.Recipes.ToList();
+            List<Recipe> recipes = praksaDBContext.Recipes.ToList();
+            foreach(var recipe in recipes)
+            {
+                recipe.Ingredients = praksaDBContext.Ingredients.Where(o => o.RecipeId == recipe.RecipeId).ToList();
+                recipe.Category = praksaDBContext.Categories.Where(o => o.CategoryId == recipe.CategoryId).First();
+            }
+
+            return recipes;
         }
 
         public void DeleteRecipe(int id)

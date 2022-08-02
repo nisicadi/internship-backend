@@ -194,3 +194,6 @@ C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\obj\Debug\netcoreapp3.1\Re
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.dll
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.pdb
 C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\obj\Debug\netcoreapp3.1\Recipes.genruntimeconfig.cache
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Adi\Documents\Praksa\Recipes\Recipes\Recipes\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
