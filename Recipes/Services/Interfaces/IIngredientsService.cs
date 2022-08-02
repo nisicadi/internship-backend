@@ -9,5 +9,6 @@ namespace Recipes.Services.Interfaces
         public List<Ingredient> GetAllIngredients();
         public void DeleteIngredient(int id);
         public void AddIngredient(Ingredient ingredient);
+        public void UpdateIngredient(Ingredient ingredient);
     }
 }

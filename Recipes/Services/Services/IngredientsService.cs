@@ -34,5 +34,11 @@ namespace Recipes.Services.Services
             praksaDBContext.Ingredients.Add(ingredient);
             praksaDBContext.SaveChanges();
         }
+
+        public void UpdateIngredient(Ingredient ingredient)
+        {
+            praksaDBContext.Ingredients.Update(ingredient);
+            praksaDBContext.SaveChanges();
+        }
     }
 }

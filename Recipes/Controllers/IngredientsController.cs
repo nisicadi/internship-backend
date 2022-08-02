@@ -39,5 +39,11 @@ namespace Recipes.Controllers
         {
             _ingredientsInterface.AddIngredient(ingredient);
         }
+
+        [HttpPut("{id}")]
+        public void UpdateIngredient(Ingredient ingredient)
+        {
+            _ingredientsInterface.UpdateIngredient(ingredient);
+        }
     }
 }
