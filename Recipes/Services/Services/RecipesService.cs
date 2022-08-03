@@ -42,7 +42,9 @@ namespace Recipes.Services.Services
 
         public void AddRecipe(Recipe recipe)
         {
+            recipe.Category = praksaDBContext.Categories.Find(recipe.CategoryId);
             praksaDBContext.Recipes.Add(recipe);
+
             praksaDBContext.SaveChanges();
         }
 
