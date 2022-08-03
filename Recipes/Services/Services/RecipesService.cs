@@ -36,6 +36,9 @@ namespace Recipes.Services.Services
 
         public void DeleteRecipe(int id)
         {
+            foreach(var ingredient in GetRecipe(id).Ingredients)
+                praksaDBContext.Ingredients.Remove(ingredient);
+
             praksaDBContext.Recipes.Remove(GetRecipe(id));
             praksaDBContext.SaveChanges();
         }
