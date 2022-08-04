@@ -76,6 +76,10 @@ namespace Recipes.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.RecipePrice)
+                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnName("recipePrice");
+
                 entity.Property(e => e.RecipeTitle)
                     .IsRequired()
                     .HasMaxLength(255)

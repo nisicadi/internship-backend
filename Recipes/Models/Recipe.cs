@@ -18,6 +18,7 @@ namespace Recipes.Models
         public string RecipeTitle { get; set; }
         public string ImageUrl { get; set; }
         public int? CategoryId { get; set; }
+        public decimal? RecipePrice { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
