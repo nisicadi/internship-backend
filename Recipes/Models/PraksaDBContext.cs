@@ -18,7 +18,9 @@ namespace Recipes.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Foodstuff> Foodstuffs { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
+        public virtual DbSet<MeasurementUnit> MeasurementUnits { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,14 +46,30 @@ namespace Recipes.Models
                     .HasColumnName("categoryName");
             });
 
+            modelBuilder.Entity<Foodstuff>(entity =>
+            {
+                entity.ToTable("Foodstuff");
+
+                entity.Property(e => e.FoodstuffId).HasColumnName("foodstuffId");
+
+                entity.Property(e => e.FoodstuffName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("foodstuffName");
+
+                entity.Property(e => e.MeasurementId).HasColumnName("measurementId");
+
+                entity.HasOne(d => d.Measurement)
+                    .WithMany(p => p.Foodstuffs)
+                    .HasForeignKey(d => d.MeasurementId)
+                    .HasConstraintName("FK__Foodstuff__measu__5EBF139D");
+            });
+
             modelBuilder.Entity<Ingredient>(entity =>
             {
                 entity.Property(e => e.IngredientId).HasColumnName("ingredientID");
 
-                entity.Property(e => e.IngredientName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ingredientName");
+                entity.Property(e => e.FoodstuffId).HasColumnName("foodstuffId");
 
                 entity.Property(e => e.Quantity)
                     .HasColumnType("decimal(18, 0)")
@@ -59,10 +77,35 @@ namespace Recipes.Models
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipeID");
 
+                entity.HasOne(d => d.Foodstuff)
+                    .WithMany(p => p.Ingredients)
+                    .HasForeignKey(d => d.FoodstuffId)
+                    .HasConstraintName("FK__Ingredien__foods__5FB337D6");
+
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Ingredients)
                     .HasForeignKey(d => d.RecipeId)
                     .HasConstraintName("FK__Ingredien__recip__5165187F");
+            });
+
+            modelBuilder.Entity<MeasurementUnit>(entity =>
+            {
+                entity.HasKey(e => e.MeasurementId)
+                    .HasName("PK__measurem__5524F4D2E1BD477E");
+
+                entity.ToTable("MeasurementUnit");
+
+                entity.Property(e => e.MeasurementId).HasColumnName("measurementId");
+
+                entity.Property(e => e.Measurement)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("measurement");
+
+                entity.Property(e => e.MeasurementLong)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("measurement_long");
             });
 
             modelBuilder.Entity<Recipe>(entity =>
