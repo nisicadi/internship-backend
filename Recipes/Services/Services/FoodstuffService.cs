@@ -31,6 +31,7 @@ namespace Recipes.Services.Services
 
         public void AddFoodstuff(Foodstuff foodstuff)
         {
+            foodstuff.Measurement = praksaDBContext.MeasurementUnits.Find(foodstuff.MeasurementId);
             praksaDBContext.Foodstuffs.Add(foodstuff);
             praksaDBContext.SaveChanges();
         }
