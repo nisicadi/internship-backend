@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -12,6 +13,7 @@ namespace Recipes.Models
             Foodstuffs = new HashSet<Foodstuff>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MeasurementId { get; set; }
         public string Measurement { get; set; }
         public string MeasurementLong { get; set; }
