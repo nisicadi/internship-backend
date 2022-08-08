@@ -46,6 +46,10 @@ namespace Recipes.Services.Services
         public void AddRecipe(Recipe recipe)
         {
             recipe.Category = praksaDBContext.Categories.Find(recipe.CategoryId);
+            foreach(var ingredient in recipe.Ingredients)
+            {
+                ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
+            }
             praksaDBContext.Recipes.Add(recipe);
 
             praksaDBContext.SaveChanges();
