@@ -31,6 +31,11 @@ namespace Recipes.Services.Services
 
         public void AddFoodstuff(Foodstuff foodstuff)
         {
+            //Dodavanje novog storage za novu namirnicu
+            Storage storage = new Storage();
+            storage.Foodstuff = foodstuff;
+            praksaDBContext.Storages.Add(storage);
+
             foodstuff.Measurement = praksaDBContext.MeasurementUnits.Find(foodstuff.MeasurementId);
             praksaDBContext.Foodstuffs.Add(foodstuff);
             praksaDBContext.SaveChanges();

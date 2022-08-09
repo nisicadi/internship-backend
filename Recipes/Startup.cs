@@ -36,6 +36,8 @@ namespace Recipes
             services.AddScoped<IIngredientsService, IngredientsService>();
             services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
             services.AddScoped<IFoodstuffService, FoodstuffService>();
+            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IStorageInputService, StorageInputService>();
             services.AddSingleton<ILoggerFactory, LoggerFactory>();
             services.Configure<Recipe>(Configuration);
             services.AddDbContext<PraksaDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RecipeURL")));

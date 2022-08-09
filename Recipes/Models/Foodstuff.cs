@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -11,14 +10,17 @@ namespace Recipes.Models
         public Foodstuff()
         {
             Ingredients = new HashSet<Ingredient>();
+            StorageInputs = new HashSet<StorageInput>();
+            Storages = new HashSet<Storage>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FoodstuffId { get; set; }
         public string FoodstuffName { get; set; }
         public int? MeasurementId { get; set; }
 
         public virtual MeasurementUnit Measurement { get; set; }
         public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<StorageInput> StorageInputs { get; set; }
+        public virtual ICollection<Storage> Storages { get; set; }
     }
 }

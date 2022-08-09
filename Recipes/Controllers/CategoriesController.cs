@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Recipes.Models;
 using Recipes.Services.Interfaces;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ namespace Recipes.Controllers
             _categoriesInterface = categoriesInterface;
         }
 
-        //Categories
         [HttpGet]
         public List<Category> GetAllCategories()
         {

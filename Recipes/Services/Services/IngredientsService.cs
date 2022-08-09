@@ -31,7 +31,11 @@ namespace Recipes.Services.Services
 
         public void AddIngredient(Ingredient ingredient)
         {
-            //ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
+            //Update kolicinu u Skladistu
+            //Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
+            //storage.Quantity += ingredient.Quantity;
+            //praksaDBContext.Storages.Update(storage);
+
             praksaDBContext.Ingredients.Add(ingredient);
             praksaDBContext.SaveChanges();
         }
