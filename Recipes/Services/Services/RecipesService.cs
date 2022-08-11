@@ -37,7 +37,13 @@ namespace Recipes.Services.Services
         public void DeleteRecipe(int id)
         {
             foreach(var ingredient in GetRecipe(id).Ingredients)
+            {
                 praksaDBContext.Ingredients.Remove(ingredient);
+                Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
+                storage.Quantity -= ingredient.Quantity;
+                storage.UnderMin = storage.Quantity < storage.MinQuantity;
+                praksaDBContext.Storages.Update(storage);
+            }
 
             praksaDBContext.Recipes.Remove(GetRecipe(id));
             praksaDBContext.SaveChanges();
@@ -49,14 +55,45 @@ namespace Recipes.Services.Services
             foreach(var ingredient in recipe.Ingredients)
             {
                 ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
-            }
-            praksaDBContext.Recipes.Add(recipe);
 
+                Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
+                storage.Quantity += ingredient.Quantity;
+                storage.UnderMin = storage.Quantity < storage.MinQuantity;
+                praksaDBContext.Storages.Update(storage);
+            }
+
+            praksaDBContext.Recipes.Add(recipe);
             praksaDBContext.SaveChanges();
         }
 
         public void UpdateRecipe(Recipe recipe)
         {
+            recipe.Category = praksaDBContext.Categories.Find(recipe.CategoryId);
+            Recipe oldRecipe = GetRecipe(recipe.RecipeId);
+
+            //Remove old quantities
+            foreach (var ingredient in oldRecipe.Ingredients)
+            {
+                ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
+
+                Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
+                storage.Quantity -= ingredient.Quantity;
+                storage.UnderMin = storage.Quantity < storage.MinQuantity;
+                praksaDBContext.Storages.Update(storage);
+            }
+
+            //Add new quantities from recipe ingredient to storage
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
+
+                Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
+                storage.Quantity += ingredient.Quantity;
+                storage.UnderMin = storage.Quantity < storage.MinQuantity;
+                praksaDBContext.Storages.Update(storage);
+            }
+
+            //Implementacija losa, baca exception kada se u update recepta doda novi ingredient
             praksaDBContext.Recipes.Update(recipe);
             praksaDBContext.SaveChanges();
         }

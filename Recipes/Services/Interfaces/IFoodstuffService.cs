@@ -8,7 +8,7 @@ namespace Recipes.Services.Interfaces
         public Foodstuff GetFoodstuff(int id);
         public List<Foodstuff> GetAllFoodstuffs();
         public void DeleteFoodstuff(int id);
-        public void AddFoodstuff(Foodstuff foodstuff);
+        public void AddFoodstuff(Newtonsoft.Json.Linq.JObject data);
         public void UpdateFoodstuff(Foodstuff foodstuff);
     }
 }

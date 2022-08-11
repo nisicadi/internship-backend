@@ -29,11 +29,17 @@ namespace Recipes.Services.Services
             praksaDBContext.SaveChanges();
         }
 
-        public void AddFoodstuff(Foodstuff foodstuff)
+        public void AddFoodstuff(Newtonsoft.Json.Linq.JObject data)
         {
+            //System.Diagnostics.Debugger.Break();
+
+            Foodstuff foodstuff = data["foodstuff"].ToObject<Foodstuff>();
+            decimal minValue = data["minValue"].ToObject<decimal>();
+
             //Dodavanje novog storage za novu namirnicu
             Storage storage = new Storage();
             storage.Foodstuff = foodstuff;
+            storage.MinQuantity = minValue;
             praksaDBContext.Storages.Add(storage);
 
             foodstuff.Measurement = praksaDBContext.MeasurementUnits.Find(foodstuff.MeasurementId);

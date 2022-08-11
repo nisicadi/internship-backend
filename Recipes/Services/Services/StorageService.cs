@@ -20,7 +20,8 @@ namespace Recipes.Services.Services
 
         public List<Storage> GetAllStorages()
         {
-            return praksaDBContext.Storages.ToList();
+            //Order by UnderMin desc, Name asc
+            return praksaDBContext.Storages.OrderByDescending(ob => ob.UnderMin).ThenBy(ob2 => ob2.Foodstuff.FoodstuffName).ToList();
         }
 
         public void DeleteStorage(int id)

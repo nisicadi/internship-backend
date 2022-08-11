@@ -35,9 +35,9 @@ namespace Recipes.Controllers
         }
 
         [HttpPost]
-        public void AddFoodstuff(Foodstuff foodstuff)
+        public void AddFoodstuff(Newtonsoft.Json.Linq.JObject data)
         {
-            _foodstuffInterface.AddFoodstuff(foodstuff);
+            _foodstuffInterface.AddFoodstuff(data);
         }
 
         [HttpPut("{id}")]

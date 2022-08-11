@@ -36,6 +36,7 @@ namespace Recipes.Services.Services
             storage.UnderMin = storage.Quantity < storage.MinQuantity;
             praksaDBContext.Storages.Update(storage);
 
+            storageInput.InputDate = System.DateTime.Now;
             storageInput.Foodstuff = praksaDBContext.Foodstuffs.Find(storageInput.FoodstuffId);
             praksaDBContext.StorageInputs.Add(storageInput);
             praksaDBContext.SaveChanges();
