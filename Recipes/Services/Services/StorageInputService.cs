@@ -32,7 +32,10 @@ namespace Recipes.Services.Services
         public void AddStorageInput(StorageInput storageInput)
         {
             Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == storageInput.FoodstuffId).First();
-            storage.Quantity+=storageInput.Quantity;
+            if(storageInput.RemoveQuantity)
+                storage.Quantity-=storageInput.Quantity;
+            else
+                storage.Quantity += storageInput.Quantity;
             storage.UnderMin = storage.Quantity < storage.MinQuantity;
             praksaDBContext.Storages.Update(storage);
 

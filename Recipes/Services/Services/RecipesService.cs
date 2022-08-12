@@ -8,9 +8,11 @@ namespace Recipes.Services.Services
     public class RecipesService : IRecipesService
     {
         private PraksaDBContext praksaDBContext;
-        public RecipesService(PraksaDBContext praksaDBContext)
+        private PraksaDBContext praksaDBContext1;
+        public RecipesService(PraksaDBContext praksaDBContext, PraksaDBContext praksaDBContext1)
         {
             this.praksaDBContext = praksaDBContext;
+            this.praksaDBContext1 = praksaDBContext1;
         }
 
         public Recipe GetRecipe(int id)
@@ -40,7 +42,7 @@ namespace Recipes.Services.Services
             {
                 praksaDBContext.Ingredients.Remove(ingredient);
                 Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
-                storage.Quantity -= ingredient.Quantity;
+                storage.Quantity += ingredient.Quantity;
                 storage.UnderMin = storage.Quantity < storage.MinQuantity;
                 praksaDBContext.Storages.Update(storage);
             }
@@ -57,7 +59,7 @@ namespace Recipes.Services.Services
                 ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
 
                 Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
-                storage.Quantity += ingredient.Quantity;
+                storage.Quantity -= ingredient.Quantity;
                 storage.UnderMin = storage.Quantity < storage.MinQuantity;
                 praksaDBContext.Storages.Update(storage);
             }
@@ -69,7 +71,7 @@ namespace Recipes.Services.Services
         public void UpdateRecipe(Recipe recipe)
         {
             recipe.Category = praksaDBContext.Categories.Find(recipe.CategoryId);
-            Recipe oldRecipe = GetRecipe(recipe.RecipeId);
+            Recipe oldRecipe = praksaDBContext.Recipes.Find(recipe.RecipeId);
 
             //Remove old quantities
             foreach (var ingredient in oldRecipe.Ingredients)
@@ -77,7 +79,7 @@ namespace Recipes.Services.Services
                 ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
 
                 Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
-                storage.Quantity -= ingredient.Quantity;
+                storage.Quantity += ingredient.Quantity;
                 storage.UnderMin = storage.Quantity < storage.MinQuantity;
                 praksaDBContext.Storages.Update(storage);
             }
@@ -88,12 +90,15 @@ namespace Recipes.Services.Services
                 ingredient.Foodstuff = praksaDBContext.Foodstuffs.Find(ingredient.FoodstuffId);
 
                 Storage storage = praksaDBContext.Storages.Where(o => o.FoodstuffId == ingredient.FoodstuffId).First();
-                storage.Quantity += ingredient.Quantity;
+                storage.Quantity -= ingredient.Quantity;
                 storage.UnderMin = storage.Quantity < storage.MinQuantity;
                 praksaDBContext.Storages.Update(storage);
+
             }
 
-            //Implementacija losa, baca exception kada se u update recepta doda novi ingredient
+            //https://stackoverflow.com/questions/68530015/the-instance-of-entity-type-company-cannot-be-tracked-because-another-instance
+            praksaDBContext.Entry(oldRecipe).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+
             praksaDBContext.Recipes.Update(recipe);
             praksaDBContext.SaveChanges();
         }

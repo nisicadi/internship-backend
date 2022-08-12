@@ -181,6 +181,8 @@ namespace Recipes.Models
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("quantity");
 
+                entity.Property(e => e.RemoveQuantity).HasColumnName("removeQuantity");
+
                 entity.HasOne(d => d.Foodstuff)
                     .WithMany(p => p.StorageInputs)
                     .HasForeignKey(d => d.FoodstuffId)
